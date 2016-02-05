@@ -1,3 +1,4 @@
+
 --[[
 #
 # Show users information in groups 
@@ -236,10 +237,10 @@ return {
 	'(Reply)!setrank <rank>: change members rank.',
   },
   patterns = {
-	"^[/!](id)$",
-	"^[/!](id) (.*)$",
-	"^[/!](ids) (%d+) (.*)$",
-	"^[/!](ids) (.*)$",
+	"^[/!]([Ii][Nn][Ff][Oo])$",
+	"^[/!]([Ii][Nn][Ff][Oo]) (.*)$",
+	"^[/!]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (%d+) (.*)$",
+	"^[/!]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (.*)$",
   },
   run = run
 }
