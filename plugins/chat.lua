@@ -64,6 +64,6 @@ return {
 		"^[Ss]alam$",
 		}, 
 	run = run,
-    --privileged = true,
+
 	pre_process = pre_process
 }
