@@ -16,3 +16,21 @@ return {
 }
 
 end
+
+do
+
+function run(msg, matches)
+  return "سلام, " .. matches[1]
+end
+
+return {
+  description = "Says hello to someone", 
+
+  patterns = {
+"^سلام
+
+  }, 
+  run = run 
+}
+
+end
