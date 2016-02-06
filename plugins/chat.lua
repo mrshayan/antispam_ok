@@ -1,6 +1,6 @@
 local function run(msg)
-if msg.text == "hi" then
-	return "Hello bb"
+if msg.text == "سلام" then
+	return "سلام علیکم"
 end
 if msg.text == "Hi" then
 	return "Hello honey"
@@ -53,7 +53,7 @@ return {
 	description = "Chat With Robot Server", 
 	usage = "chat with robot",
 	patterns = {
-		"^[Hh]i$",
+		"^سلام",
 		"^[Hh]ello$",
 		"^[Zz]ac$",
 		"^ZAC$",
