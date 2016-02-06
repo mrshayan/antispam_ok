@@ -26,11 +26,11 @@ end
 if msg.text == "ZAC" then
 	return "Barash bezan sak"
 end
-if msg.text == "Umbrella" then
-	return "Yes?"
+if msg.text == "رنجر" then
+	return "بله?"
 end
-if msg.text == "umbrella" then
-	return "What?"
+if msg.text == "رنجر" then
+	return "چیه?"
 end
 if msg.text == "bot" then
 	return "hum?"
@@ -41,11 +41,11 @@ end
 if msg.text == "?" then
 	return "Hum??"
 end
-if msg.text == "Bye" then
-	return "Babay"
+if msg.text == "بای" then
+	return "بسلامت"
 end
-if msg.text == "bye" then
-	return "Bye Bye"
+if msg.text == "بای" then
+	return "بای بای"
 end
 end
 
@@ -58,8 +58,8 @@ return {
 		"^[Zz]ac$",
 		"^ZAC$",
 		"^[Bb]ot$",
-		"^[Uu]mbrella$",
-		"^[Bb]ye$",
+		"^رنجر
+		"^بای$",
 		"^?$",
 		"^[Ss]alam$",
 		}, 
