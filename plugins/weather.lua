@@ -1,61 +1,58 @@
-do
-
-local BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
-
-local function get_weather(location)
-  print("Finding weather in ", location)
-  location = string.gsub(location," ","+")
-  local url = BASE_URL
-  url = url..'?q='..location
-  url = url..'&units=metric'
-  url = url..'&appid=bd82977b86bf27fb59a04b61b657fb6f'
-
-  local b, c, h = http.request(url)
-  if c ~= 200 then return nil end
-
-  local weather = json:decode(b)
-  local city = weather.name
-  local country = weather.sys.country
-  local temp = 'The temperature in '..city
-    ..' (' ..country..')'
-    ..' is '..weather.main.temp..'°C'
-  local conditions = 'Current conditions are: '
-    .. weather.weather[1].description
-
-  if weather.weather[1].main == 'Clear' then
-    conditions = conditions .. ' ☀'
-  elseif weather.weather[1].main == 'Clouds' then
-    conditions = conditions .. ' ☁☁'
-  elseif weather.weather[1].main == 'Rain' then
-    conditions = conditions .. ' ☔'
-  elseif weather.weather[1].main == 'Thunderstorm' then
-    conditions = conditions .. ' ☔☔☔☔'
-  end
-
-  return temp .. '\n' .. conditions
+if not config.owm_api_key then
+	print('Missing config value: owm_api_key.')
+	print('weather.lua will not be enabled.')
+	return
 end
 
-local function run(msg, matches)
-  local city = 'Madrid,ES'
+local command = 'weather <location>'
+local doc = [[```
+/weather <location>
+Returns the current weather conditions for a given location.
+```]]
 
-  if matches[1] ~= '!weather' then
-    city = matches[1]
-  end
-  local text = get_weather(city)
-  if not text then
-    text = 'Can\'t get weather from that city.'
-  end
-  return text
+local triggers = {
+	'^/weather[@'..bot.username..']*'
+}
+
+local action = function(msg)
+
+	local input = msg.text:input()
+	if not input then
+		if msg.reply_to_message and msg.reply_to_message.text then
+			input = msg.reply_to_message.text
+		else
+			sendMessage(msg.chat.id, doc, true, msg.message_id, true)
+			return
+		end
+	end
+
+	local coords = get_coords(input)
+	if type(coords) == 'string' then
+		sendReply(msg, coords)
+		return
+	end
+
+	local url = 'http://api.openweathermap.org/data/2.5/weather?APPID=' .. config.owm_api_key .. '&lat=' .. coords.lat .. '&lon=' .. coords.lon
+
+	local jstr, res = HTTP.request(url)
+	if res ~= 200 then
+		sendReply(msg, config.errors.connection)
+		return
+	end
+
+	local jdat = JSON.decode(jstr)
+
+	local celsius = string.format('%.2f', jdat.main.temp - 273.15)
+	local fahrenheit = string.format('%.2f', celsius * (9/5) + 32)
+	local message = celsius .. '°C | ' .. fahrenheit .. '°F, ' .. jdat.weather[1].description .. '.'
+
+	sendReply(msg, message)
+
 end
 
 return {
-  description = "weather in that city (Madrid is default)",
-  usage = "!weather (city)",
-  patterns = {
-    "^!weather$",
-    "^!weather (.*)$"
-  },
-  run = run
+	action = action,
+	triggers = triggers,
+	doc = doc,
+	command = command
 }
-
-end
