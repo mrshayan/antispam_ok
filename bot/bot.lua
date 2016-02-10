@@ -256,7 +256,7 @@ function create_config( )
 An advance Administration bot based on yagop/telegram-bot 
 Admins
 @shayan31323
-https://telegram.me/teleparsy_antispam
+https://telegram.me/shayan31323
 ]],
     help_text_realm = [[
 Realm Commands:
