@@ -1,4 +1,3 @@
-❤️ รђคץคη•sҽɾҽҽղ ❤️Reportam, [10.02.16 18:52]
 package.path = package.path .. ';.luarocks/share/lua/5.2/?.lua'
   ..';.luarocks/share/lua/5.2/?/init.lua'
 package.cpath = package.cpath .. ';.luarocks/lib/lua/5.2/?.so'
@@ -164,7 +163,6 @@ function match_plugin(plugin, plugin_name, msg)
         -- If plugin is for privileged users only
         if not
 
-❤️ รђคץคη•sҽɾҽҽղ ❤️Reportam, [10.02.16 18:52]
 warns_user_not_allowed(plugin, msg) then
           local result = plugin.run(msg, matches)
           if result then
