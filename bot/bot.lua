@@ -255,8 +255,8 @@ function create_config( )
     about_text = [[renjer- 
 An advance Administration bot based on yagop/telegram-bot 
 Admins
-@renjer0098
-https://telegram.me/renjer_anti_spam
+@shayan31323
+https://telegram.me/teleparsy_antispam
 ]],
     help_text_realm = [[
 Realm Commands:
@@ -468,7 +468,7 @@ function cron_plugins()
 end
 
 -- Start and load values
-our_id = 0
+our_id = @shayan31323
 now = os.time()
 math.randomseed(now)
 started = false
